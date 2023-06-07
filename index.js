@@ -1,15 +1,16 @@
+const { PORT } = require('./config/config');
+const { db } = require('./config/database');
+
 const express = require('express');
-const app = express();
+const server = express();
 
 
-app.get('/', (req, res) => {
-    res.send('Hello World!');
-    }   
-);
-
-app.listen(5000, () => {
-    console.log('Example app listening on port 3000!');
-    }   
-);
-
-
+db.sync({ force: false })
+    .then(() => {
+        server.listen(PORT, () => {
+            console.log(`Server running on port ${PORT}`);
+        });
+    })
+    .catch((error) => {
+        console.log(error);
+    });

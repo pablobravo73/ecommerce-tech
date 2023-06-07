@@ -29,6 +29,7 @@ COPY --chown=node:node package.json package-lock.json* ./
 ENV PATH=/home/node/app/node_modules/.bin:$PATH
 
 RUN npm install --no-optional && npm cache clean --force
+RUN npm install pg
 
 CMD ["npm", "run", "dev"]
 
